@@ -9,9 +9,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@RequiredArgsConstructor
+@RequiredArgsConstructor // todo - what is the reason for that annotation? what do you expect?
 public class ApplicationConfig {
 
+    // todo - move to SecurityConfig
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();

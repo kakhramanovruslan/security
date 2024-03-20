@@ -13,6 +13,7 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Component
+// todo - camel case
 public class JWTUtil {
 
     @Value("${jwt_secret")

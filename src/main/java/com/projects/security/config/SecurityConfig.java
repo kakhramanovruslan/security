@@ -10,6 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.RequestMatchers;
 
+// todo - where is @Configuration?
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
@@ -24,6 +25,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/**", "/error").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                // todo - ›csrf method is deprecated
                 .csrf().disable()
                 .build();
     }

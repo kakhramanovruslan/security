@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+// todo - import
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
     private final UserRepository userRepository;
@@ -22,6 +23,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 
         if(user.isEmpty())
             throw new UsernameNotFoundException("User not found");
+        // todo - import
         return new com.projects.security.security.UserDetails(user.get());
     }
 }

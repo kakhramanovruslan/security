@@ -26,6 +26,7 @@ public class AuthController {
     private final JWTUtil jwtUtil;
 
     @PostMapping("/registration")
+    // todo - cover response with ResponseEntity
     public Map<String, String> registration(@RequestBody User user){
         registrationService.register(user);
         String token = jwtUtil.generateToken(user.getUsername());
@@ -33,6 +34,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
+    // todo - cover response with ResponseEntity
     public Map<String, String> login(@RequestBody AuthDTO authDTO){
         UsernamePasswordAuthenticationToken authInputToken
                 = new UsernamePasswordAuthenticationToken(authDTO.getUsername(), authDTO.getPassword());
