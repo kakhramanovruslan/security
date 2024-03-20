@@ -23,11 +23,14 @@ public class User {
     private String username;
 
     @Column(name = "password")
+    // todo - store hashed password in the db
     private String password;
 
+    // todo - add @Email annotation
     @Column(name = "email")
     private String email;
 
+    // todo - make an enum
     @Column(name = "role")
     private String role;
 

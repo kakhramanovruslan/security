@@ -18,6 +18,7 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
+// todo - camel case
 public class JWTFilter extends OncePerRequestFilter {
 
     private final JWTUtil jwtUtil;
