@@ -1,7 +1,7 @@
 package com.projects.security.config;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.projects.security.security.JWTUtil;
+import com.projects.security.security.JwtUtil;
 import com.projects.security.security.UserDetails;
 import com.projects.security.services.UserDetailsService;
 import jakarta.servlet.FilterChain;
@@ -18,9 +18,9 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class JWTFilter extends OncePerRequestFilter {
+public class JwtFilter extends OncePerRequestFilter {
 
-    private final JWTUtil jwtUtil;
+    private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
 
     @Override

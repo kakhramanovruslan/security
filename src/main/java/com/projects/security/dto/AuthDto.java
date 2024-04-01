@@ -1,9 +1,9 @@
-package com.projects.security.DTO;
+package com.projects.security.dto;
 
 import lombok.Data;
 
 @Data
-public class AuthDTO {
+public class AuthDto {
 
     private String username;
 

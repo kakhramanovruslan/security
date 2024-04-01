@@ -1,13 +1,16 @@
 package com.projects.security.controllers;
 
-import com.projects.security.DTO.AuthDTO;
+import com.projects.security.dto.AuthDto;
 import com.projects.security.entity.User;
-import com.projects.security.security.JWTUtil;
+import com.projects.security.security.JwtUtil;
 import com.projects.security.services.RegistrationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,26 +26,26 @@ public class AuthController {
     private final RegistrationService registrationService;
     private final AuthenticationManager authenticationManager;
 
-    private final JWTUtil jwtUtil;
+    private final JwtUtil jwtUtil;
 
     @PostMapping("/registration")
-    public Map<String, String> registration(@RequestBody User user){
+    public ResponseEntity<Map<String, String>> registration(@RequestBody User user){
         registrationService.register(user);
         String token = jwtUtil.generateToken(user.getUsername());
-        return Map.of("token", token);
+        return ResponseEntity.ok(Map.of("token", token));
     }
 
     @PostMapping("/login")
-    public Map<String, String> login(@RequestBody AuthDTO authDTO){
+    public ResponseEntity<Map<String, String>> login(@RequestBody AuthDto authDTO){
         UsernamePasswordAuthenticationToken authInputToken
                 = new UsernamePasswordAuthenticationToken(authDTO.getUsername(), authDTO.getPassword());
         try {
             authenticationManager.authenticate(authInputToken);
         } catch (BadCredentialsException e){
-            return Map.of("message", "Incorrect credentials!");
+            return ResponseEntity.ok(Map.of("message", "Incorrect credentials!"));
         }
 
         String token = jwtUtil.generateToken(authDTO.getUsername());
-        return Map.of("token", token);
+        return ResponseEntity.ok(Map.of("token", token));
     }
 }

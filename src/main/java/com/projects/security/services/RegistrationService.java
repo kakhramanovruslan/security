@@ -1,5 +1,6 @@
 package com.projects.security.services;
 
+import com.projects.security.entity.RoleEnum;
 import com.projects.security.entity.User;
 import com.projects.security.repositories.UserRepository;
 import jakarta.transaction.Transactional;
@@ -17,7 +18,7 @@ public class RegistrationService {
     @Transactional
     public void register(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("ROLE_USER");
+        user.setRole(RoleEnum.ROLE_USER);
         userRepository.save(user);
     }
 
