@@ -4,11 +4,13 @@ import com.projects.security.dto.AuthDto;
 import com.projects.security.entity.User;
 import com.projects.security.security.JwtUtil;
 import com.projects.security.services.RegistrationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -24,14 +26,14 @@ public class AuthController {
     private final JwtUtil jwtUtil;
 
     @PostMapping("/registration")
-    public ResponseEntity<Map<String, String>> registration(@RequestBody User user){
+    public ResponseEntity<Map<String, String>> registration(@RequestBody @Valid User user){
         registrationService.register(user);
         String token = jwtUtil.generateToken(user.getUsername());
         return ResponseEntity.ok(Map.of("token", token));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody AuthDto authDTO){
+    public ResponseEntity<Map<String, String>> login(@RequestBody @Valid AuthDto authDTO){
         UsernamePasswordAuthenticationToken authInputToken
                 = new UsernamePasswordAuthenticationToken(authDTO.getUsername(), authDTO.getPassword());
         try {
